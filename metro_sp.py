@@ -14,16 +14,19 @@ def get_response_and_content():
     return resp, content
 
 
+def clean_string(value):
+    new_value = value.replace('\n','').replace('\r','')
+    return ' '.join(new_value.split())
+
+
 def set_item_on_dict(spans, info):
     if len(spans) != 2:
         print 'Something went wrong. Check data structure.'
         sys.exit()
     if spans[1].find('a'):
-		spans1 = spans[1].a.string.encode('utf-8')
+        spans1 = clean_string(spans[1].a.string).encode('utf-8')
     else:
-		spans1 = spans[1].string
-
-    print '- %s: %s\n' % (spans[0].string, spans1)
+        spans1 = clean_string(spans[1].string).encode('utf-8')
 
     info[spans[0].string] = spans1
     return info
@@ -50,4 +53,4 @@ def get_metro_status():
 
 if __name__ == '__main__':
     metro_status = get_metro_status()
-    print '---------\nresult (dict):\n', metro_status
+    print '\n\n metro_status = {} \n\n'.format(metro_status)
