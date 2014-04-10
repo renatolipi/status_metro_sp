@@ -2,3 +2,6 @@
 .cache/
 *.swp
 metro/
+build/
+dist/
+*.egg-info/
