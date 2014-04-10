@@ -4,18 +4,19 @@ import sys
 import httplib2
 from bs4 import BeautifulSoup as BS
 
-URL_METRO = 'http://www.metro.sp.gov.br/Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
+URL_METRO = 'http://www.metro.sp.gov.br/' +\
+            'Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
 
 
 def get_response_and_content():
     h = httplib2.Http(".cache")
-    headers = {'cache-control':'max-age=%s' %(3600*24*365)}
+    headers = {'cache-control': 'max-age=%s' % (3600 * 24 * 365)}
     resp, content = h.request(URL_METRO, "GET", headers=headers)
     return resp, content
 
 
 def clean_string(value):
-    new_value = value.replace('\n','').replace('\r','')
+    new_value = value.replace('\n', '').replace('\r', '')
     return ' '.join(new_value.split())
 
 
