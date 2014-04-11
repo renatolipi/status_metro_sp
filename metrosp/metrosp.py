@@ -3,9 +3,6 @@
 import httplib2
 from bs4 import BeautifulSoup as BS
 
-URL_METRO = 'http://www.metro.sp.gov.br/' +\
-            'Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
-
 
 class MetroSP():
 
