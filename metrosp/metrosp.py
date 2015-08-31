@@ -42,7 +42,7 @@ class MetroSP():
         resp, content = self._get_response_and_content()
         if resp['status'] != '200':
             raise 'status: {}. Aborting...'.format(resp['status'])
-        html = BS(content)
+        html = BS(content, "html.parser")
         items = html.find_all('li')
         info = self._get_info_from_items(items)
         return info
