@@ -1,6 +1,6 @@
 #coding:utf-8
 
-import httplib2
+import requests
 from bs4 import BeautifulSoup as BS
 
 
@@ -11,10 +11,10 @@ class MetroSP():
             'Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
 
     def _get_response_and_content(self):
-        h = httplib2.Http(".cache")
-        headers = {'cache-control': 'max-age=%s' % (3600 * 24 * 365)}
-        resp, content = h.request(self.url_metro, "GET", headers=headers)
-        return resp, content
+        response = requests.get(self.url_metro)
+        content = response.content
+        status_code = response.status_code
+        return status_code, content
 
     def _clean_string(self, value):
         new_value = value.replace('\n', '').replace('\r', '')
@@ -39,9 +39,9 @@ class MetroSP():
         return info
 
     def get_metro_status(self):
-        resp, content = self._get_response_and_content()
-        if resp['status'] != '200':
-            raise 'status: {}. Aborting...'.format(resp['status'])
+        status_code, content = self._get_response_and_content()
+        if status_code != 200:
+            raise 'status: {}. Aborting...'.format(status_code)
         html = BS(content, "html.parser")
         items = html.find_all('li')
         info = self._get_info_from_items(items)
