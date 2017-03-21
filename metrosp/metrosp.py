@@ -1,4 +1,6 @@
-#coding:utf-8
+# coding:utf-8
+
+from __future__ import print_function
 
 import requests
 from bs4 import BeautifulSoup as BS
@@ -46,3 +48,8 @@ class MetroSP():
         items = html.find_all('li')
         info = self._get_info_from_items(items)
         return info
+
+    def print_metro_status(self):
+        metro_status = self.get_metro_status()
+        for line, status in metro_status.items():
+            print(line, status)

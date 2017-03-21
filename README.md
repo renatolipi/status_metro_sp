@@ -4,7 +4,7 @@ MetroSP
 * Author: Renato Lipi
 * Contributor: Ale Borba
 
-Version: 0.1.2
+Version: 0.2.0
 
 Como usar
 -------------------------
@@ -12,8 +12,9 @@ Como usar
 	from metrosp import MetroSP
 
 	metro = MetroSP()
-    infos = metro.get_metro_status()
-    print infos
+    metro.print_metro_status()
+    
+    dict_info = metro.get_metro_status()
 
 License
 ---------

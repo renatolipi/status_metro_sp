@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name = 'metrosp',
-    version = '0.1.2',
+    version = '0.2.0',
     packages = ['metrosp'],
     author = 'Renato Lipi',
     author_email = '',
