@@ -4,7 +4,7 @@ MetroSP
 * Author: Renato Lipi
 * Contributor: Ale Borba
 
-Version: 0.2.0
+Version: 0.2.1
 
 Como usar
 -------------------------
@@ -19,7 +19,7 @@ Como usar
 License
 ---------
 
-    Copyright 2015 Renato Lipi
+    Copyright 2018 Renato Lipi
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
