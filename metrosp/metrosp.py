@@ -18,7 +18,8 @@ class MetroSP():
         status_code = response.status_code
         return status_code, content
 
-    def _clean_string(self, value):
+    @staticmethod
+    def _remove_line_break(value):
         new_value = value.replace('\n', '').replace('\r', '')
         return ' '.join(new_value.split())
 
@@ -26,9 +27,9 @@ class MetroSP():
         if len(spans) != 2:
             raise 'Something went wrong. Check data structure.'
         if spans[1].find('a'):
-            spans1 = self._clean_string(spans[1].a.string).encode('utf-8')
+            spans1 = self._remove_line_break(spans[1].a.string).encode('utf-8')
         else:
-            spans1 = self._clean_string(spans[1].string).encode('utf-8')
+            spans1 = self._remove_line_break(spans[1].string).encode('utf-8')
 
         info[spans[0].string] = spans1
         return info
