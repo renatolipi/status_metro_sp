@@ -2,14 +2,13 @@ MetroSP
 ==========================================
 
 * Author: Renato Lipi
-* Contributor: Ale Borba
 
-Version: 0.2.1
+Version: 1.0.3.rc001
 
 Como usar
 -------------------------
 
-	from metrosp import MetroSP
+	from metrosp.metrosp import MetroSP
 
 	metro = MetroSP()
     metro.print_metro_status()

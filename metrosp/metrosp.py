@@ -1,16 +1,13 @@
 # coding:utf-8
 
-from __future__ import print_function
-
-import requests
 from bs4 import BeautifulSoup as BS
+import requests
 
 
 class MetroSP():
 
     def __init__(self):
-        self.url_metro = 'http://www.metro.sp.gov.br/' +\
-            'Sistemas/direto-do-metro-via4/diretodoMetroHome.aspx'
+        self.url_metro = "https://www.metro.sp.gov.br/direto-do-metro"
 
     def _get_response_and_content(self):
         response = requests.get(self.url_metro)
@@ -18,26 +15,26 @@ class MetroSP():
         status_code = response.status_code
         return status_code, content
 
-    def _clean_string(self, value):
-        new_value = value.replace('\n', '').replace('\r', '')
-        return ' '.join(new_value.split())
+    def _set_item_on_dict(self, divs, info):
+        linha_numero = None
+        linha_nome = ""
+        linha_status = ""
+        for div in divs:
+            if 'linha-numero' == div.get('class', []):
+                linha_numero = int(div.text)
+            if 'linha-nome' == div.get('class', []):
+                linha_nome = div.text
+            if 'linha-situacao' == div.get('class', []):
+                linha_status = div.text
 
-    def _set_item_on_dict(self, spans, info):
-        if len(spans) != 2:
-            raise 'Something went wrong. Check data structure.'
-        if spans[1].find('a'):
-            spans1 = self._clean_string(spans[1].a.string).encode('utf-8')
-        else:
-            spans1 = self._clean_string(spans[1].string).encode('utf-8')
-
-        info[spans[0].string] = spans1
+        info[linha_numero] = {linha_nome: linha_status}
         return info
 
     def _get_info_from_items(self, items):
         info = {}
         for item in items:
-            spans = item.find_all('span')
-            self._set_item_on_dict(spans, info)
+            divs = item.find_all('div')
+            self._set_item_on_dict(divs, info)
         return info
 
     def get_metro_status(self):
